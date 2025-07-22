@@ -35,7 +35,7 @@ function AppContent() {
       <Router>
         <ResponsiveLayout>
           <Routes>
-            <Route path="/" element={<FreeCoursesPage />} />
+            <Route path="/" element={<HomePage />} />
             <Route path="/about" element={<AboutPage />} />
             <Route path="/success-stories" element={<SuccessStoriesPage />} />
             <Route path="/resources" element={<ResourcesPage />} />
@@ -58,6 +58,7 @@ function AppContent() {
             />
             <Route path="/courses" element={<CoursesPage />} />
             <Route path="/courses/get-started" element={<GetStartedPage />} />
+            <Route path="/free-courses" element={<FreeCoursesPage />} />
             <Route path="*" element={<NotFoundPage />} />
           </Routes>
         </ResponsiveLayout>

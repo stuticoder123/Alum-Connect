@@ -93,7 +93,7 @@ const Navbar: React.FC<NavbarProps> = ({ transparent = false }) => {
           
           {/* Desktop menu */}
           <div className="hidden md:flex items-center space-x-8">
-            {['About', 'Success Stories', 'Resources', 'Blog'].map((item, index) => (
+            {["About", "Success Stories", "Resources", "Blog", "Testimonials"].map((item, index) => (
               <motion.div
                 key={item}
                 initial={{ opacity: 0, y: -20 }}
@@ -101,7 +101,7 @@ const Navbar: React.FC<NavbarProps> = ({ transparent = false }) => {
                 transition={{ delay: index * 0.1 + 0.3 }}
               >
                 <Link 
-                  to={`/${item.toLowerCase().replace(' ', '-')}`} 
+                  to={item === "Testimonials" ? "/#testimonials" : `/${item.toLowerCase().replace(' ', '-')}`} 
                   className={`${linkClasses}`}
                 >
                   <span className="relative">
@@ -261,10 +261,10 @@ const Navbar: React.FC<NavbarProps> = ({ transparent = false }) => {
             className="md:hidden bg-white/95 backdrop-blur-xl border-t border-gray-100"
           >
             <div className="px-2 pt-2 pb-3 space-y-1 sm:px-3">
-              {['About', 'Success Stories', 'Resources', 'Blog'].map((item) => (
+              {["About", "Success Stories", "Resources", "Blog", "Testimonials"].map((item) => (
                 <Link
                   key={item}
-                  to={`/${item.toLowerCase().replace(' ', '-')}`}
+                  to={item === "Testimonials" ? "/#testimonials" : `/${item.toLowerCase().replace(' ', '-')}`}
                   className="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-indigo-600 hover:bg-gray-50 transition-colors duration-200"
                   onClick={() => setIsOpen(false)}
                 >
