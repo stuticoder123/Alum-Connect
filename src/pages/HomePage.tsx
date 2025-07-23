@@ -62,17 +62,27 @@ const HomePage: React.FC = () => {
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             {[
               {
+                icon: <BookOpen className="h-8 w-8" />,
+                title: "Free Courses",
+                description: "Access high-quality programming courses covering everything from basics to advanced topics. All completely free.",
+                features: ["50+ Courses", "Video Tutorials", "Hands-on Projects", "Certificates"],
+                button: { label: "Get Started", to: "/free-courses" }
+              },
+              {
                 icon: <Users className="h-8 w-8" />,
                 title: "Mentorship Program",
                 description: "Get personalized guidance from industry experts. One-on-one sessions to accelerate your learning journey.",
-                features: ["1:1 Sessions", "Industry Experts", "Career Guidance", "Project Reviews"]
+                features: ["1:1 Sessions", "Industry Experts", "Career Guidance", "Project Reviews"],
+                button: { label: "Get Started", to: "/courses" }
               },
               {
                 icon: <Code className="h-8 w-8" />,
                 title: "Coding Community",
                 description: "Join thousands of developers, participate in challenges, share projects, and grow together.",
-                features: ["50K+ Developers", "Daily Challenges", "Code Reviews", "Live Sessions"]
+                features: ["50K+ Developers", "Daily Challenges", "Code Reviews", "Live Sessions"],
+                button: { label: "Get Started", to: "/community" }
               }
+              
             ].map((item, index) => (
               <motion.div
                 key={index}
@@ -83,9 +93,9 @@ const HomePage: React.FC = () => {
                 whileHover={{ y: -8, scale: 1.02 }}
                 className="group"
               >
-                <Card className="h-full bg-white shadow-xl border-2 border-gray-200 hover:shadow-2xl hover:border-indigo-300 transition-all duration-500 rounded-2xl overflow-hidden">
+                <Card className="h-full bg-white shadow-xl border-2 border-gray-200 hover:shadow-2xl hover:border-indigo-300 transition-all duration-500 rounded-2xl overflow-hidden flex flex-col justify-between">
                   <div className="absolute inset-0 bg-gradient-to-br from-indigo-50/80 to-purple-50/80 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
-                  <CardContent className="p-8 relative z-10">
+                  <CardContent className="p-8 relative z-10 flex flex-col flex-grow">
                     <div className="w-16 h-16 bg-gradient-to-br from-indigo-100 to-purple-100 rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300">
                       <div className="text-indigo-600 group-hover:scale-110 transition-transform duration-300">
                         {item.icon}
@@ -97,13 +107,21 @@ const HomePage: React.FC = () => {
                     <p className="text-gray-600 mb-6 group-hover:text-gray-700 transition-colors">
                       {item.description}
                     </p>
-                    <div className="space-y-2">
+                    <div className="space-y-2 mb-6">
                       {item.features.map((feature, idx) => (
                         <div key={idx} className="flex items-center text-sm text-gray-600">
                           <CheckCircle className="h-4 w-4 text-green-500 mr-2" />
                           {feature}
                         </div>
                       ))}
+                    </div>
+                    <div className="mt-auto pt-2">
+                      <a href={item.button.to} className="inline-block w-full">
+                        <button className="w-full bg-indigo-600 text-white py-2 px-4 rounded-lg font-semibold shadow hover:bg-indigo-700 transition-colors duration-200 flex items-center justify-center gap-2">
+                          {item.button.label}
+                          <ArrowRight className="w-5 h-5 ml-1" />
+                        </button>
+                      </a>
                     </div>
                   </CardContent>
                 </Card>
