@@ -65,6 +65,40 @@ const Navbar: React.FC<NavbarProps> = ({ transparent = false }) => {
       : 'text-gray-700'
   }`;
 
+  const handleScrollToTestimonials = (e: React.MouseEvent<HTMLAnchorElement>) => {
+    e.preventDefault();
+
+    // Close mobile menu immediately so it doesn't block scrolling
+    setIsOpen(false);
+
+    const element = document.getElementById('testimonials');
+
+    if (element) {
+      // compute offset so fixed navbar doesn't cover the section
+      const navEl = document.querySelector('nav');
+      const navHeight = navEl instanceof HTMLElement ? navEl.offsetHeight : 80;
+
+      // compute target position and scroll after layout settles
+      const scrollToPosition = () => {
+        const isMobile = window.innerWidth < 768; // adjust breakpoint as needed
+
+        const top = isMobile
+          ? element.getBoundingClientRect().top + window.scrollY - navHeight - 12
+          : element.getBoundingClientRect().top + window.scrollY - navHeight + 70;
+
+        window.scrollTo({ top, behavior: 'smooth' });
+      };
+
+      // wait a couple of frames so the mobile menu teardown/layout finishes
+      requestAnimationFrame(() => requestAnimationFrame(scrollToPosition));
+      return;
+    }
+
+    // If testimonials not on this page (user is on another route), navigate to home with hash.
+    navigate('/#testimonials');
+  };
+
+
   return (
     <motion.nav 
       className={navbarClasses}
@@ -100,17 +134,31 @@ const Navbar: React.FC<NavbarProps> = ({ transparent = false }) => {
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: index * 0.1 + 0.3 }}
               >
-                <Link 
-                  to={item === "Testimonials" ? "/#testimonials" : `/${item.toLowerCase().replace(' ', '-')}`} 
-                  className={`${linkClasses}`}
-                >
-                  <span className="relative">
-                    {item}
-                    <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-gradient-to-r from-indigo-600 to-purple-600 transition-all duration-300 group-hover:w-full"></span>
-                  </span>
-                </Link>
+                {item === "Testimonials" ? (
+                  <a 
+                    href="#testimonials" 
+                    onClick={handleScrollToTestimonials} 
+                    className={linkClasses}
+                  >
+                    <span className="relative">
+                      {item}
+                      <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-gradient-to-r from-indigo-600 to-purple-600 transition-all duration-300 group-hover:w-full"></span>
+                    </span>
+                  </a>
+                ) : (
+                  <Link 
+                    to={`/${item.toLowerCase().replace(' ', '-')}`} 
+                    className={linkClasses}
+                  >
+                    <span className="relative">
+                      {item}
+                      <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-gradient-to-r from-indigo-600 to-purple-600 transition-all duration-300 group-hover:w-full"></span>
+                    </span>
+                  </Link>
+                )}
               </motion.div>
             ))}
+
             
             {isAuthenticated ? (
               <motion.div 
@@ -262,15 +310,27 @@ const Navbar: React.FC<NavbarProps> = ({ transparent = false }) => {
           >
             <div className="px-2 pt-2 pb-3 space-y-1 sm:px-3">
               {["About", "Success Stories", "Resources", "Blog", "Testimonials"].map((item) => (
-                <Link
-                  key={item}
-                  to={item === "Testimonials" ? "/#testimonials" : `/${item.toLowerCase().replace(' ', '-')}`}
-                  className="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-indigo-600 hover:bg-gray-50 transition-colors duration-200"
-                  onClick={() => setIsOpen(false)}
-                >
-                  {item}
-                </Link>
+                item === "Testimonials" ? (
+                  <a
+                    key={item}
+                    href="#testimonials"
+                    onClick={handleScrollToTestimonials}
+                    className="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-indigo-600 hover:bg-gray-50 transition-colors duration-200"
+                  >
+                    {item}
+                  </a>
+                ) : (
+                  <Link
+                    key={item}
+                    to={`/${item.toLowerCase().replace(' ', '-')}`}
+                    className="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-indigo-600 hover:bg-gray-50 transition-colors duration-200"
+                    onClick={() => setIsOpen(false)}
+                  >
+                    {item}
+                  </Link>
+                )
               ))}
+
               
               {isAuthenticated ? (
                 <>

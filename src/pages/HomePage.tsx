@@ -352,7 +352,9 @@ const HomePage: React.FC = () => {
         </div>
       </section>
       
-      <Testimonials />
+      <section id="testimonials">
+        <Testimonials />
+      </section>
       
       {/* Auth Section */}
       <section className="py-24 bg-gradient-to-br from-gray-50 to-indigo-50" id="auth-section">
