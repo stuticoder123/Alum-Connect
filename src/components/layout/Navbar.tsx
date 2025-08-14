@@ -80,7 +80,7 @@ const Navbar: React.FC<NavbarProps> = ({ transparent = false }) => {
 
       // compute target position and scroll after layout settles
       const scrollToPosition = () => {
-        const isMobile = window.innerWidth < 768; // adjust breakpoint as needed
+        const isMobile = window.innerWidth < 768;
 
         const top = isMobile
           ? element.getBoundingClientRect().top + window.scrollY - navHeight - 12
@@ -89,12 +89,10 @@ const Navbar: React.FC<NavbarProps> = ({ transparent = false }) => {
         window.scrollTo({ top, behavior: 'smooth' });
       };
 
-      // wait a couple of frames so the mobile menu teardown/layout finishes
       requestAnimationFrame(() => requestAnimationFrame(scrollToPosition));
       return;
     }
 
-    // If testimonials not on this page (user is on another route), navigate to home with hash.
     navigate('/#testimonials');
   };
 
