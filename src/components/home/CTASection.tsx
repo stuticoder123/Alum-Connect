@@ -13,10 +13,10 @@ export const CTASection: React.FC = () => {
         <div className="absolute bottom-10 right-10 w-32 h-32 bg-white/5 rounded-full blur-2xl"></div>
         <div className="absolute top-1/2 left-1/3 w-16 h-16 bg-white/10 rounded-full blur-lg"></div>
       </div>
-      
+
       <div className="container mx-auto px-6 relative z-10">
         <div className="max-w-4xl mx-auto text-center">
-          <motion.div 
+          <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
@@ -26,8 +26,8 @@ export const CTASection: React.FC = () => {
             <Sparkles className="w-4 h-4 text-yellow-300" />
             <span className="text-white/90 text-sm font-medium">Join 50,000+ Members</span>
           </motion.div>
-          
-          <motion.h2 
+
+          <motion.h2
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
@@ -40,19 +40,19 @@ export const CTASection: React.FC = () => {
             </span>
             Today
           </motion.h2>
-          
-          <motion.p 
+
+          <motion.p
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6, delay: 0.2 }}
             className="text-xl text-white/80 mb-10 max-w-2xl mx-auto leading-relaxed"
           >
-            Connect with industry experts, share your experiences, and build meaningful relationships. 
+            Connect with industry experts, share your experiences, and build meaningful relationships.
             Quality mentorship that's completely free for everyone.
           </motion.p>
-          
-          <motion.div 
+
+          <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
@@ -63,9 +63,9 @@ export const CTASection: React.FC = () => {
               whileHover={{ scale: 1.05, y: -2 }}
               whileTap={{ scale: 0.95 }}
             >
-              <Button 
-                size="lg" 
-                className="bg-white text-indigo-600 hover:bg-gray-50 shadow-xl hover:shadow-2xl transform transition-all duration-300 group px-8 py-4 rounded-2xl font-semibold border-2 border-white"
+              <Button
+                size="lg"
+                className="bg-transparent text-indigo-600 hover:bg-gray-50 shadow-xl hover:shadow-2xl transform transition-all duration-300 group px-8 py-4 rounded-2xl font-semibold border-2 border-white"
                 onClick={() => {
                   const element = document.getElementById('auth-section');
                   element?.scrollIntoView({ behavior: 'smooth' });
@@ -75,13 +75,13 @@ export const CTASection: React.FC = () => {
                 <ArrowRight className="w-5 h-5 ml-2 group-hover:translate-x-1 transition-transform" />
               </Button>
             </motion.div>
-            
+
             <motion.div
               whileHover={{ scale: 1.05, y: -2 }}
               whileTap={{ scale: 0.95 }}
             >
-              <Button 
-                variant="outline" 
+              <Button
+                variant="outline"
                 size="lg"
                 className="border-2 border-white text-white hover:bg-white hover:text-indigo-600 backdrop-blur-sm px-8 py-4 rounded-2xl font-semibold bg-white/10 shadow-lg hover:shadow-xl transition-all duration-300"
                 onClick={() => {
@@ -93,7 +93,7 @@ export const CTASection: React.FC = () => {
               </Button>
             </motion.div>
           </motion.div>
-          
+
           {/* Social Proof */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -122,7 +122,7 @@ export const CTASection: React.FC = () => {
               </motion.div>
             ))}
           </motion.div>
-          
+
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
