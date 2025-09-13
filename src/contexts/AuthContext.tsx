@@ -18,6 +18,7 @@ interface AuthContextType {
   }) => Promise<void>;
   signIn: (email: string, password: string) => Promise<void>;
   signInWithLinkedIn: () => Promise<void>;
+  signInWithGoogle: () => Promise<void>;
   signOut: () => Promise<void>;
   resetPassword: (email: string) => Promise<void>;
   updatePassword: (password: string) => Promise<void>;
@@ -136,6 +137,18 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
     }
   };
 
+  const signInWithGoogle = async () => {
+    setLoading(true);
+    try {
+      await authHelpers.signInWithGoogle();
+      // User will be redirected to Google for authentication
+    } catch (error: any) {
+      console.error('Error signing in with Google:', error);
+      setLoading(false);
+      throw new Error('Google sign-in failed. Please try email sign-up instead.');
+    }
+  };
+
   const signOut = async () => {
     setLoading(true);
     try {
@@ -187,7 +200,7 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
   };
 
   // Legacy compatibility methods
-  const login = async (email: string, password: string, role: UserRole) => {
+  const login = async (email: string, password: string, _role: UserRole) => {
     await signIn(email, password);
   };
 
@@ -207,6 +220,7 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
     signUp,
     signIn,
     signInWithLinkedIn,
+    signInWithGoogle,
     signOut,
     resetPassword,
     updatePassword,

@@ -33,6 +33,18 @@ export const supabase = createClient(supabaseUrl, supabaseAnonKey, {
   }
 });
 
+// Helper to get consistent redirect URL for OAuth providers (can be overridden via env)
+export const getAuthRedirectUrl = () => {
+  const explicit = import.meta.env.VITE_AUTH_REDIRECT_URL as string | undefined;
+  if (explicit) return `${explicit.replace(/\/$/, '')}/auth/callback`;
+  // Fallback to current origin in browser context
+  if (typeof window !== 'undefined') {
+    return `${window.location.origin}/auth/callback`;
+  }
+  // Default development fallback
+  return 'http://localhost:5173/auth/callback';
+};
+
 // Database types
 export interface Profile {
   id: string;
@@ -328,8 +340,22 @@ export const authHelpers = {
     const { data, error } = await supabase.auth.signInWithOAuth({
       provider: 'linkedin_oidc',
       options: {
-        redirectTo: `${window.location.origin}/auth/callback`,
+        redirectTo: getAuthRedirectUrl(),
         scopes: 'r_liteprofile r_emailaddress'
+      }
+    });
+
+    if (error) throw error;
+    return data;
+  },
+
+  // Sign in with Google
+  async signInWithGoogle() {
+    const { data, error } = await supabase.auth.signInWithOAuth({
+      provider: 'google',
+      options: {
+        redirectTo: getAuthRedirectUrl(),
+        scopes: 'email profile openid'
       }
     });
 

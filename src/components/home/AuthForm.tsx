@@ -5,7 +5,8 @@ import { UserRole, useAuth } from '../../contexts/AuthContext';
 import Button from '../ui/Button';
 import Input from '../ui/Input';
 import Card, { CardContent, CardFooter, CardHeader } from '../ui/Card';
-import { User, Mail, Lock, ArrowRight, CheckCircle, Eye, EyeOff, Shield, Zap, GraduationCap, Briefcase, Linkedin, AlertCircle, Loader } from 'lucide-react';
+import { Mail, CheckCircle, Eye, EyeOff, Shield, Zap, GraduationCap, Briefcase, Linkedin, AlertCircle, Loader } from 'lucide-react';
+import GoogleSignInButton from '../auth/GoogleSignInButton';
 
 type FormMode = 'login' | 'register' | 'forgot-password';
 
@@ -120,6 +121,8 @@ const AuthForm: React.FC = () => {
     }
   };
 
+  // Google sign in now handled via reusable component
+
   const toggleMode = (newMode: FormMode) => {
     setMode(newMode);
     setError('');
@@ -159,13 +162,21 @@ const AuthForm: React.FC = () => {
         </CardHeader>
         
         <CardContent className="p-8">
-          {/* LinkedIn Sign In Button - Only show for login and register */}
+          {/* OAuth Sign In Buttons - Only show for login and register */}
           {mode !== 'forgot-password' && (
             <>
+              <motion.div whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.98 }} className="mb-4">
+                <GoogleSignInButton
+                  mode={mode === 'login' ? 'login' : 'register'}
+                  onError={(msg: string) => setError(msg)}
+                  fullWidth
+                />
+              </motion.div>
+
               <motion.div
                 whileHover={{ scale: 1.02 }}
                 whileTap={{ scale: 0.98 }}
-                className="mb-6"
+                className="mb-4"
               >
                 <Button
                   type="button"

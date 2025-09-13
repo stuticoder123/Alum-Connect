@@ -210,3 +210,71 @@ For support, email stuticoder123@gmail.com or create an issue in the GitHub repo
 ---
 
 **AlumConnect** - Empowering Connections. Enabling Futures. 🚀
+
+---
+
+## 🔐 Google OAuth Integration
+
+Google sign-in is implemented via Supabase Auth OAuth provider.
+
+### 1. Google Cloud Console Setup
+1. Go to https://console.cloud.google.com/
+2. Create or select a project.
+3. Navigate to: APIs & Services > OAuth consent screen
+   - User Type: External (publish when ready)
+   - Add scopes: email, profile (OpenID basic info is implicit)
+4. Go to: APIs & Services > Credentials > Create Credentials > OAuth Client ID
+   - Application Type: Web application
+   - Authorized redirect URIs (exact strings):
+     - Local development: `http://127.0.0.1:54321/auth/v1/callback`
+     - Production: `https://YOUR-PROJECT-REF.supabase.co/auth/v1/callback`
+5. Copy the Client ID & Client Secret.
+
+### 2. Supabase Provider Configuration
+In Supabase Dashboard:
+Authentication > Providers > Google
+- Enable the provider
+- Paste your Client ID & Client Secret
+- Save
+
+No Google secret is exposed in the frontend code; Supabase performs the server-side exchange.
+
+### 3. Environment Variables
+Minimum required in your `.env` (copied from `.env.example`):
+```
+VITE_SUPABASE_URL=your_supabase_project_url
+VITE_SUPABASE_ANON_KEY=your_supabase_anon_key
+# Optional explicit base for constructing redirect URL
+VITE_AUTH_REDIRECT_URL=http://localhost:5173
+```
+
+### 4. Frontend Usage
+The reusable component `GoogleSignInButton` calls:
+```ts
+supabase.auth.signInWithOAuth({ provider: 'google', options: { redirectTo: '<origin>/auth/callback' } });
+```
+Redirect target is centralized via `getAuthRedirectUrl()` in `src/lib/supabase.ts`.
+
+### 5. Testing Checklist
+| Scenario | Expected Result |
+|----------|-----------------|
+| Click Google button | Redirect to Google consent screen |
+| Approve consent | Redirect back to `/auth/callback` then app session established |
+| Cancel consent | Return with no session; show friendly error if provided |
+| Wrong redirect URI | Google error page about mismatch |
+| Missing Supabase keys | App throws startup error (guard rails) |
+
+### 6. Common Issues
+| Issue | Cause | Fix |
+|-------|-------|-----|
+| 400 redirect_uri_mismatch | Typo or missing URI in Google credentials | Add exact callback URI (no trailing slash) |
+| Provider disabled | Not enabled in Supabase | Enable Google provider and save |
+| Module not found: lucide-react | Dependencies missing | Run `npm install` |
+| Blank screen after redirect | Runtime error / keys missing | Check browser console & `.env` values |
+
+### 7. Next Enhancements (Optional)
+- Auto-create profile on first OAuth login if not present.
+- Add analytics event for OAuth start/success/failure.
+- Add unified OAuth error banner on callback page.
+
+---
