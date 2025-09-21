@@ -212,6 +212,31 @@ const Testimonials: React.FC = () => {
           </div>
         </div>
 
+       import { motion, useMotionValue, useTransform, animate } from "framer-motion";
+import { useEffect } from "react";
+
+// 🔢 CountUp Component
+const CountUp = ({ from = 0, to, duration = 2, suffix = "" }) => {
+  const count = useMotionValue(from);
+  const rounded = useTransform(count, (latest) => Math.floor(latest));
+
+  useEffect(() => {
+    const controls = animate(count, to, { duration, ease: "easeOut" });
+    return controls.stop;
+  }, [count, to, duration]);
+
+  return (
+    <motion.span>
+      {rounded}
+      {suffix}
+    </motion.span>
+  );
+};
+
+export default function StatsSection() {
+  return (
+    <section className="py-16">
+      <div className="container mx-auto">
         {/* Stats Section */}
         <motion.div
           initial={{ opacity: 0, y: 30 }}
@@ -221,10 +246,10 @@ const Testimonials: React.FC = () => {
           className="mt-20 grid grid-cols-2 md:grid-cols-4 gap-8"
         >
           {[
-            { number: "10,000+", label: "Active Users" },
-            { number: "95%", label: "Success Rate" },
-            { number: "500+", label: "Partner Companies" },
-            { number: "50+", label: "Countries" }
+            { number: 10000, label: "Active Users", suffix: "+" },
+            { number: 95, label: "Success Rate", suffix: "%" },
+            { number: 500, label: "Partner Companies", suffix: "+" },
+            { number: 50, label: "Countries", suffix: "+" }
           ].map((stat, index) => (
             <motion.div
               key={index}
@@ -232,7 +257,7 @@ const Testimonials: React.FC = () => {
               whileHover={{ scale: 1.05 }}
             >
               <div className="text-3xl md:text-4xl font-bold text-indigo-600 mb-2 group-hover:text-indigo-700 transition-colors">
-                {stat.number}
+                <CountUp to={stat.number} duration={2.5} suffix={stat.suffix} />
               </div>
               <div className="text-gray-600 font-medium">{stat.label}</div>
             </motion.div>
@@ -241,6 +266,7 @@ const Testimonials: React.FC = () => {
       </div>
     </section>
   );
-};
+}
+
 
 export default Testimonials;
