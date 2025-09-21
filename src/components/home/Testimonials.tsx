@@ -1,6 +1,7 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { Quote, Star, ArrowLeft, ArrowRight } from 'lucide-react';
+import StatsSection from "./StatsSection";
 
 interface Testimonial {
   quote: string;
