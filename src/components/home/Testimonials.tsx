@@ -212,7 +212,7 @@ const Testimonials: React.FC = () => {
           </div>
         </div>
 
-     import { motion } from "framer-motion";
+    import { motion } from "framer-motion";
 import CountUp from "react-countup";
 
 export default function StatsSection() {
@@ -249,6 +249,7 @@ export default function StatsSection() {
     </section>
   );
 }
+
 
 
 
