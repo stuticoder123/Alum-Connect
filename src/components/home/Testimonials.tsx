@@ -212,26 +212,8 @@ const Testimonials: React.FC = () => {
           </div>
         </div>
 
-       import { motion, useMotionValue, useTransform, animate } from "framer-motion";
-import { useEffect } from "react";
-
-// 🔢 CountUp Component
-const CountUp = ({ from = 0, to, duration = 2, suffix = "" }) => {
-  const count = useMotionValue(from);
-  const rounded = useTransform(count, (latest) => Math.floor(latest));
-
-  useEffect(() => {
-    const controls = animate(count, to, { duration, ease: "easeOut" });
-    return controls.stop;
-  }, [count, to, duration]);
-
-  return (
-    <motion.span>
-      {rounded}
-      {suffix}
-    </motion.span>
-  );
-};
+     import { motion } from "framer-motion";
+import CountUp from "react-countup";
 
 export default function StatsSection() {
   return (
@@ -257,7 +239,7 @@ export default function StatsSection() {
               whileHover={{ scale: 1.05 }}
             >
               <div className="text-3xl md:text-4xl font-bold text-indigo-600 mb-2 group-hover:text-indigo-700 transition-colors">
-                <CountUp to={stat.number} duration={2.5} suffix={stat.suffix} />
+                <CountUp end={stat.number} duration={2.5} suffix={stat.suffix} />
               </div>
               <div className="text-gray-600 font-medium">{stat.label}</div>
             </motion.div>
@@ -267,6 +249,7 @@ export default function StatsSection() {
     </section>
   );
 }
+
 
 
 export default Testimonials;
