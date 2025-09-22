@@ -65,7 +65,7 @@ export const CTASection: React.FC = () => {
             >
               <Button 
                 size="lg" 
-                className="bg-white text-indigo-600 hover:bg-gray-50 shadow-xl hover:shadow-2xl transform transition-all duration-300 group px-8 py-4 rounded-2xl font-semibold border-2 border-white"
+                className="border-2 border-white text-white hover:bg-white hover:text-indigo-600 backdrop-blur-sm px-8 py-4 rounded-2xl font-semibold bg-white/10 shadow-lg hover:shadow-xl transition-all duration-300"
                 onClick={() => {
                   const element = document.getElementById('auth-section');
                   element?.scrollIntoView({ behavior: 'smooth' });
