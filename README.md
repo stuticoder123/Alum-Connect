@@ -1,6 +1,15 @@
-# AlumConnect - Social Platform for Alumni-Student Connections
+# 🎓 AlumConnect
 
-AlumConnect is a comprehensive social platform designed to bridge the gap between alumni and students, providing free mentorship, networking opportunities, and a thriving community for knowledge sharing.
+### Empowering Alumni • Guiding Students • Building Futures 🚀
+
+A modern AI-powered alumni-student networking platform designed to provide mentorship, collaboration, career guidance, and community-driven growth.
+
+![React](https://img.shields.io/badge/React-18-blue?logo=react)
+![TypeScript](https://img.shields.io/badge/TypeScript-5-blue?logo=typescript)
+![Supabase](https://img.shields.io/badge/Supabase-Backend-green?logo=supabase)
+![Vite](https://img.shields.io/badge/Vite-Build-purple?logo=vite)
+![MIT License](https://img.shields.io/badge/License-MIT-yellow)
+![Open Source](https://img.shields.io/badge/Open%20Source-Yes-success)
 
 ## 🚀 Features
 
@@ -42,6 +51,94 @@ AlumConnect is a comprehensive social platform designed to bridge the gap betwee
 - **Vite** for fast development
 - **ESLint** for code quality
 - **TypeScript** for type safety
+
+## 📂 Project Structure
+
+```text
+Alum-Connect/
+│
+├── src/
+│   │   App.tsx
+│   │   main.tsx
+│   │   index.css
+│   │
+│   ├── components/
+│   │   ├── ai/
+│   │   │   └── MentorshipMatcher.tsx
+│   │   │
+│   │   ├── auth/
+│   │   │   └── ProtectedRoute.tsx
+│   │   │
+│   │   ├── chat/
+│   │   │   ├── ChatBot.tsx
+│   │   │   ├── CodingBot.tsx
+│   │   │   ├── FirebaseService.ts
+│   │   │   ├── InternalChatModule.tsx
+│   │   │   ├── SocketService.ts
+│   │   │   └── WebRTCService.ts
+│   │   │
+│   │   ├── dashboard/
+│   │   ├── home/
+│   │   ├── layout/
+│   │   ├── mobile/
+│   │   ├── pwa/
+│   │   ├── ui/
+│   │   └── verification/
+│   │
+│   ├── contexts/
+│   │   └── AuthContext.tsx
+│   │
+│   ├── hooks/
+│   │   ├── useCodingProblems.ts
+│   │   ├── useNotifications.ts
+│   │   ├── usePosts.ts
+│   │   └── usePWA.ts
+│   │
+│   ├── lib/
+│   │   └── supabase.ts
+│   │
+│   └── pages/
+│       ├── HomePage.tsx
+│       ├── AboutPage.tsx
+│       ├── CoursesPage.tsx
+│       ├── ResourcesPage.tsx
+│       ├── DashboardPage.tsx
+│       ├── ProfilePage.tsx
+│       ├── BlogPage.tsx
+│       ├── SuccessStoriesPage.tsx
+│       │
+│       ├── auth/
+│       │   ├── Callback.tsx
+│       │   └── ResetPassword.tsx
+│       │
+│       └── courses/
+│           └── GetStartedPage.tsx
+│
+├── public/
+├── supabase/
+├── package.json
+├── vite.config.ts
+└── README.md
+```
+
+### 📖 Folder Overview
+
+| Folder | Purpose |
+|----------|----------|
+| `components/ai` | AI-powered mentor matching features |
+| `components/chat` | Real-time chat, bots & communication modules |
+| `components/dashboard` | Alumni, student & admin dashboards |
+| `components/home` | Homepage sections and landing page UI |
+| `components/layout` | Navbar, Footer & reusable layouts |
+| `components/mobile` | Mobile-first interactions |
+| `components/pwa` | Progressive Web App functionality |
+| `components/ui` | Shared UI components |
+| `components/verification` | User verification workflows |
+| `contexts` | Global state management |
+| `hooks` | Custom React hooks |
+| `lib` | External integrations & utilities |
+| `pages` | Application routes and pages |
+```
 
 ## 🚀 Getting Started
 
