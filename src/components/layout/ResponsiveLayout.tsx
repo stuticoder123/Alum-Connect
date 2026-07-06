@@ -1,44 +1,47 @@
 import React from "react";
 import { useLocation } from "react-router-dom";
 import Navbar from "./Navbar";
-// import MobileNavbar from "./MobileNavbar";
 import Footer from "./Footer";
+import AnnouncementBanner from "./AnnouncementBanner";
 
 interface ResponsiveLayoutProps {
-	children: React.ReactNode;
+  children: React.ReactNode;
 }
 
 const ResponsiveLayout: React.FC<ResponsiveLayoutProps> = ({ children }) => {
-	const location = useLocation();
-	const isHomePage = location.pathname === "/";
+  const location = useLocation();
+  const isHomePage = location.pathname === "/";
 
-	return (
-		<div className="flex flex-col min-h-screen">
-			{/* Desktop Navbar */}
-			<div className="hidden md:block">
-				<Navbar transparent={isHomePage} />
-			</div>
+  return (
+    <div className="flex flex-col min-h-screen">
+      {/* Pre-Launch Banner */}
+      <AnnouncementBanner />
 
-			{/* Mobile Navbar */}
-			<div className="md:hidden">
-				<Navbar transparent={false} />
-			</div>
+      {/* Desktop Navbar */}
+      <div className="hidden md:block">
+        <Navbar transparent={isHomePage} />
+      </div>
 
-			{/* Main Content */}
-			<main className="flex-grow">{children}</main>
+      {/* Mobile Navbar */}
+      <div className="md:hidden">
+        <Navbar transparent={false} />
+      </div>
 
-			{/* Footer - Hidden on mobile for dashboard pages */}
-			<div
-				className={`${
-					location.pathname.includes("/dashboard") ? "hidden md:block" : ""
-				}`}>
-				<Footer />
-			</div>
+      {/* Main Content */}
+      <main className="flex-grow">{children}</main>
 
-			{/* Mobile Bottom Navigation */}
-			{/* <MobileNavbar /> */}
-		</div>
-	);
+      {/* Footer */}
+      <div
+        className={`${
+          location.pathname.includes("/dashboard")
+            ? "hidden md:block"
+            : ""
+        }`}
+      >
+        <Footer />
+      </div>
+    </div>
+  );
 };
 
 export default ResponsiveLayout;
