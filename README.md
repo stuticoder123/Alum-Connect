@@ -192,7 +192,7 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 ## 👥 Team
 
 **Created by Stuti Gupta**
-- 3rd year B.Tech. CSE student @ RCEW, Jaipur
+- 4th year B.Tech. CSE student @ RCEW, Jaipur + 20K family on LinkedIn itself
 - GitHub: [@stuticoder123](https://github.com/stuticoder123)
 - LinkedIn: [stuticoder1](https://www.linkedin.com/in/stuticoder1/)
 - Email: stuticoder123@gmail.com
