@@ -46,6 +46,15 @@ interface MentorProfile {
   responseRate: number;
   isVerified: boolean;
   matchScore: number;
+
+  skillMatch: number;
+  branchMatch: number;
+  locationMatch: number;
+  careerGoalMatch: number;
+  companyMatch: number;
+  interestMatch: number;
+  experienceMatch: number;
+
   matchReasons: string[];
   availability: 'high' | 'medium' | 'low';
   mentorshipStyle: string[];
@@ -61,6 +70,26 @@ interface MatchingCriteria {
   mentorshipType: string[];
   communicationStyle: string;
 }
+
+const calculateMatchScore = (
+  skillMatch: number,
+  branchMatch: number,
+  locationMatch: number,
+  careerGoalMatch: number,
+  companyMatch: number,
+  interestMatch: number,
+  experienceMatch: number
+) => {
+  return Math.round(
+    skillMatch * 0.30 +
+    branchMatch * 0.10 +
+    locationMatch * 0.10 +
+    careerGoalMatch * 0.20 +
+    companyMatch * 0.15 +
+    interestMatch * 0.10 +
+    experienceMatch * 0.05
+  );
+};
 
 const MentorshipMatcher: React.FC = () => {
   const { profile } = useAuth();
@@ -98,6 +127,13 @@ const MentorshipMatcher: React.FC = () => {
       rating: 4.9,
       responseRate: 98,
       isVerified: true,
+      skillMatch: 96,
+      branchMatch: 88,
+      locationMatch: 92,
+      careerGoalMatch: 98,
+      companyMatch: 95,
+      interestMatch: 90,
+      experienceMatch: 85,
       matchScore: 95,
       matchReasons: [
         'Same institution background (IIT)',
@@ -127,6 +163,13 @@ const MentorshipMatcher: React.FC = () => {
       responseRate: 95,
       isVerified: true,
       matchScore: 88,
+      skillMatch: 82,
+      branchMatch: 80,
+      locationMatch: 89,
+      careerGoalMatch: 95,
+      companyMatch: 88,
+      interestMatch: 86,
+      experienceMatch: 84,
       matchReasons: [
         'Perfect for PM transition goals',
         'Engineering to PM background',
@@ -155,6 +198,13 @@ const MentorshipMatcher: React.FC = () => {
       responseRate: 92,
       isVerified: true,
       matchScore: 82,
+      skillMatch: 92,
+      branchMatch: 85,
+      locationMatch: 80,
+      careerGoalMatch: 94,
+      companyMatch: 87,
+      interestMatch: 96,
+      experienceMatch: 82,
       matchReasons: [
         'ML/AI expertise alignment',
         'Recent graduate perspective',
@@ -336,6 +386,14 @@ const MentorshipMatcher: React.FC = () => {
           <Sparkles className="h-4 w-4 mr-1 text-yellow-500" />
           Why this match?
         </h4>
+
+        <div className="mt-4">
+          <h4 className="font-semibold text-sm mb-3 flex items-center">
+            <Target className="h-4 w-4 mr-2 text-indigo-600" />
+                Match Breakdown
+          </h4>
+        <div className="space-y-2">
+          
         <div className="space-y-1">
           {mentor.matchReasons.slice(0, 2).map((reason, index) => (
             <div key={index} className="flex items-center text-xs text-gray-600">
@@ -362,44 +420,207 @@ const MentorshipMatcher: React.FC = () => {
         </div>
       </div>
 
-      {/* Skills */}
-      <div className="mb-4">
-        <div className="flex flex-wrap gap-1">
-          {mentor.skills.slice(0, 4).map((skill) => (
-            <span
-              key={skill}
-              className="px-2 py-1 bg-indigo-100 text-indigo-700 rounded-md text-xs"
-            >
-              {skill}
-            </span>
-          ))}
-          {mentor.skills.length > 4 && (
-            <span className="px-2 py-1 bg-gray-100 text-gray-600 rounded-md text-xs">
-              +{mentor.skills.length - 4} more
-            </span>
-          )}
-        </div>
-      </div>
+     {/* AI Skill Match Section */}
+<div className="mb-5">
 
-      {/* Availability */}
-      <div className="flex items-center justify-between mb-4">
-        <div className="flex items-center text-sm text-gray-600">
-          <Clock className="h-4 w-4 mr-1" />
-          <span className={`font-medium ${
-            mentor.availability === 'high' ? 'text-green-600' :
-            mentor.availability === 'medium' ? 'text-yellow-600' :
-            'text-red-600'
-          }`}>
-            {mentor.availability === 'high' ? 'Highly Available' :
-             mentor.availability === 'medium' ? 'Moderately Available' :
-             'Limited Availability'}
-          </span>
-        </div>
-        <div className="flex items-center text-sm text-gray-600">
-          <MapPin className="h-4 w-4 mr-1" />
-          {mentor.location}
-        </div>
-      </div>
+  <div className="flex items-center justify-between mb-2">
+    <div className="flex items-center">
+      <Zap className="h-4 w-4 text-yellow-500 mr-2" />
+      <span className="font-medium text-sm text-gray-800">
+        Skill Compatibility
+      </span>
+    </div>
+
+    <span className="text-sm font-bold text-green-600">
+      {mentor.skillMatch}%
+    </span>
+  </div>
+
+  {/* Progress Bar */}
+  <div className="w-full h-3 bg-gray-200 rounded-full overflow-hidden">
+    <motion.div
+      initial={{ width: 0 }}
+      animate={{ width: `${mentor.skillMatch}%` }}
+      transition={{ duration: 1 }}
+      className="h-full bg-gradient-to-r from-green-400 via-emerald-500 to-green-600 rounded-full"
+    />
+  </div>
+
+  {/* Match Level Badge */}
+  <div className="mt-2 flex justify-end">
+    <span
+      className={`text-xs font-medium px-2 py-1 rounded-full ${
+        mentor.skillMatch >= 90
+          ? "bg-green-100 text-green-700"
+          : mentor.skillMatch >= 75
+          ? "bg-yellow-100 text-yellow-700"
+          : "bg-red-100 text-red-700"
+      }`}
+    >
+      {mentor.skillMatch >= 90
+        ? "Excellent Match"
+        : mentor.skillMatch >= 75
+        ? "Good Match"
+        : "Average Match"}
+    </span>
+  </div>
+
+  {/* Skills Tags */}
+<div className="mt-4">
+  <div className="flex flex-wrap gap-2">
+    {mentor.skills.map((skill) => (
+      <motion.span
+        whileHover={{ scale: 1.05 }}
+        key={skill}
+        className={`px-3 py-1.5 rounded-full text-xs font-medium border transition-all duration-200 ${
+          ["React", "Node.js", "Python"].includes(skill)
+            ? "bg-green-100 text-green-700 border-green-300"
+            : "bg-gradient-to-r from-indigo-50 to-blue-50 border-indigo-200 text-indigo-700"
+        }`}
+      >
+        {skill}
+      </motion.span>
+    ))}
+  </div>
+</div>
+
+  <div>
+  <div className="flex justify-between text-xs mb-1">
+    <span>Branch</span>
+    <span>{mentor.branchMatch}%</span>
+  </div>
+
+  <div className="w-full bg-gray-200 rounded-full h-2">
+    <div
+      className="bg-blue-500 h-2 rounded-full"
+      style={{ width: `${mentor.branchMatch}%` }}
+    />
+  </div>
+</div>
+
+  <div>
+  <div className="flex justify-between text-xs mb-1">
+    <span>Location</span>
+    <span>{mentor.locationMatch}%</span>
+  </div>
+
+  <div className="w-full bg-gray-200 rounded-full h-2">
+    <div
+      className="bg-purple-500 h-2 rounded-full"
+      style={{ width: `${mentor.locationMatch}%` }}
+    />
+  </div>
+</div>
+
+  <div>
+  <div className="flex justify-between text-xs mb-1">
+    <span>Career Goal</span>
+    <span>{mentor.careerGoalMatch}%</span>
+  </div>
+
+  <div className="w-full bg-gray-200 rounded-full h-2">
+    <div
+      className="bg-pink-500 h-2 rounded-full"
+      style={{ width: `${mentor.careerGoalMatch}%` }}
+    />
+  </div>
+</div>
+
+  <div>
+  <div className="flex justify-between text-xs mb-1">
+    <span>Target Company</span>
+    <span>{mentor.companyMatch}%</span>
+  </div>
+
+  <div className="w-full bg-gray-200 rounded-full h-2">
+    <div
+      className="bg-yellow-500 h-2 rounded-full"
+      style={{ width: `${mentor.companyMatch}%` }}
+    />
+  </div>
+</div>
+
+  <div>
+  <div className="flex justify-between text-xs mb-1">
+    <span>Interests</span>
+    <span>{mentor.interestMatch}%</span>
+  </div>
+
+  <div className="w-full bg-gray-200 rounded-full h-2">
+    <div
+      className="bg-cyan-500 h-2 rounded-full"
+      style={{ width: `${mentor.interestMatch}%` }}
+    />
+  </div>
+</div>
+
+<div>
+  <div className="flex justify-between text-xs mb-1">
+    <span>Experience</span>
+    <span>{mentor.experienceMatch}%</span>
+  </div>
+
+  <div className="w-full bg-gray-200 rounded-full h-2">
+    <div
+      className="bg-red-500 h-2 rounded-full"
+      style={{ width: `${mentor.experienceMatch}%` }}
+    />
+  </div>
+</div>
+
+  <div className="mt-4 bg-indigo-50 border border-indigo-100 rounded-lg p-3">
+  <div className="flex items-start">
+    <Brain className="h-4 w-4 text-indigo-600 mr-2 mt-0.5" />
+
+    <p className="text-xs text-indigo-800">
+      Recommended because your skillset, career goals and preferred industry
+      closely align with this mentor's background at {mentor.company}.
+    </p>
+  </div>
+</div>
+  
+{/* AI Insight */}
+<div className="mt-3 bg-indigo-50 border border-indigo-100 rounded-lg p-3">
+  <div className="flex items-start">
+    <Brain className="h-4 w-4 text-indigo-600 mr-2 mt-0.5" />
+
+    <p className="text-xs text-indigo-800 leading-relaxed">
+      AI detected strong overlap in your technical stack and career
+      interests. This mentor can guide you in{" "}
+      <span className="font-semibold">
+        {mentor.skills.slice(0, 2).join(" & ")}
+      </span>.
+    </p>
+  </div>
+</div>
+
+{/* Availability */}
+<div className="flex items-center justify-between mb-4 mt-4">
+  <div className="flex items-center text-sm text-gray-600">
+    <Clock className="h-4 w-4 mr-1" />
+
+    <span
+      className={`font-medium ${
+        mentor.availability === "high"
+          ? "text-green-600"
+          : mentor.availability === "medium"
+          ? "text-yellow-600"
+          : "text-red-600"
+      }`}
+    >
+      {mentor.availability === "high"
+        ? "Highly Available"
+        : mentor.availability === "medium"
+        ? "Moderately Available"
+        : "Limited Availability"}
+    </span>
+  </div>
+
+  <div className="flex items-center text-sm text-gray-600">
+    <MapPin className="h-4 w-4 mr-1" />
+    {mentor.location}
+  </div>
+</div>
 
       {/* Action Buttons */}
       <div className="flex space-x-2">
