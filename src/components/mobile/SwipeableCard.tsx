@@ -36,7 +36,7 @@ const SwipeableCard: React.FC<SwipeableCardProps> = ({
     setIsSwipeActive(true);
   };
 
-  const handleDragEnd = (event: any, info: PanInfo) => {
+  const handleDragEnd = (_event: MouseEvent | TouchEvent | PointerEvent, info: PanInfo) => {
     setIsSwipeActive(false);
     
     if (info.offset.x > 100 && onSwipeRight) {

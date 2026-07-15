@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import { useEffect } from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { AuthProvider } from './contexts/AuthContext';
 import { usePWA } from './hooks/usePWA';
@@ -18,6 +18,8 @@ import OfflineIndicator from './components/pwa/OfflineIndicator';
 import CoursesPage from './pages/CoursesPage';
 import GetStartedPage from './pages/courses/GetStartedPage';
 import FreeCoursesPage from './pages/FreeCoursesPage';
+import AuthCallback from './pages/auth/Callback';
+import ResetPassword from './pages/auth/ResetPassword';
 
 function AppContent() {
   const { registerServiceWorker, requestNotificationPermission } = usePWA();
@@ -59,6 +61,8 @@ function AppContent() {
             <Route path="/courses" element={<CoursesPage />} />
             <Route path="/courses/get-started" element={<GetStartedPage />} />
             <Route path="/free-courses" element={<FreeCoursesPage />} />
+            <Route path="/auth/callback" element={<AuthCallback />} />
+            <Route path="/auth/reset-password" element={<ResetPassword />} />
             <Route path="*" element={<NotFoundPage />} />
           </Routes>
         </ResponsiveLayout>

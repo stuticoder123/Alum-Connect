@@ -1,52 +1,24 @@
 import React, { useState } from 'react';
-import { motion } from 'framer-motion';
-import { useAuth } from '../../contexts/AuthContext';
 import Card, { CardContent, CardHeader } from '../ui/Card';
-import { 
-  Users, 
-  Shield, 
-  Calendar, 
-  Briefcase, 
-  Star, 
-  MapPin, 
-  Building, 
-  GraduationCap,
-  CheckCircle,
+import {
+  Users,
+  Shield,
+  Calendar,
+  Briefcase,
+  MapPin,
+  Building,
   Clock,
-  TrendingUp,
-  Award,
-  Target,
-  BookOpen,
-  Video,
-  Coffee,
-  Send,
-  Heart,
-  ThumbsUp,
-  Share2,
-  MoreHorizontal,
   Search,
   Filter,
-  Bell,
-  Plus,
-  ArrowRight,
-  Zap,
-  Brain,
   BadgeCheck,
   UserCheck,
   UserX,
   FileText,
-  Globe,
-  Linkedin,
-  Mail,
-  Phone,
-  Edit,
-  Upload,
   Eye,
   Download,
   AlertTriangle,
   Settings,
   BarChart3,
-  PieChart,
   Activity,
   Database,
   Server,
@@ -115,9 +87,8 @@ interface SystemMetrics {
 }
 
 const AdminDashboard: React.FC = () => {
-  const { profile } = useAuth();
   const [activeTab, setActiveTab] = useState('overview');
-  const [selectedVerification, setSelectedVerification] = useState<PendingVerification | null>(null);
+  const [, setSelectedVerification] = useState<PendingVerification | null>(null);
 
   // Mock system metrics
   const systemMetrics: SystemMetrics = {

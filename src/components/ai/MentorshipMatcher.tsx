@@ -1,28 +1,18 @@
 import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { useAuth } from '../../contexts/AuthContext';
-import Card, { CardContent, CardHeader } from '../ui/Card';
-import { 
-  Brain, 
-  Users, 
-  Star, 
-  MapPin, 
-  Building, 
-  GraduationCap,
+import Card, { CardContent } from '../ui/Card';
+import {
+  Brain,
+  MapPin,
   CheckCircle,
   Sparkles,
   Target,
-  BookOpen,
-  Briefcase,
   MessageSquare,
   Bot,
   Zap,
-  Heart,
-  TrendingUp,
-  Award,
   Clock,
   Send,
-  ArrowRight,
   Filter,
   Search,
   Sliders
@@ -71,31 +61,11 @@ interface MatchingCriteria {
   communicationStyle: string;
 }
 
-const calculateMatchScore = (
-  skillMatch: number,
-  branchMatch: number,
-  locationMatch: number,
-  careerGoalMatch: number,
-  companyMatch: number,
-  interestMatch: number,
-  experienceMatch: number
-) => {
-  return Math.round(
-    skillMatch * 0.30 +
-    branchMatch * 0.10 +
-    locationMatch * 0.10 +
-    careerGoalMatch * 0.20 +
-    companyMatch * 0.15 +
-    interestMatch * 0.10 +
-    experienceMatch * 0.05
-  );
-};
-
 const MentorshipMatcher: React.FC = () => {
   const { profile } = useAuth();
   const [matches, setMatches] = useState<MentorProfile[]>([]);
   const [loading, setLoading] = useState(false);
-  const [criteria, setCriteria] = useState<MatchingCriteria>({
+  const [criteria] = useState<MatchingCriteria>({
     careerGoals: [],
     interests: [],
     preferredIndustries: [],
@@ -224,6 +194,7 @@ const MentorshipMatcher: React.FC = () => {
       setMatches(mockMatches);
       setLoading(false);
     }, 1500);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [criteria]);
 
   const generateAIIntroduction = (mentor: MentorProfile) => {
@@ -401,6 +372,8 @@ const MentorshipMatcher: React.FC = () => {
               {reason}
             </div>
           ))}
+        </div>
+      </div>
         </div>
       </div>
 
@@ -621,6 +594,7 @@ const MentorshipMatcher: React.FC = () => {
     {mentor.location}
   </div>
 </div>
+      </div>
 
       {/* Action Buttons */}
       <div className="flex space-x-2">

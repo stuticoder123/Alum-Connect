@@ -26,7 +26,7 @@ interface AuthContextType {
   isAuthenticated: boolean;
   // Legacy compatibility
   currentUser: Profile | null;
-  login: (email: string, password: string, role: UserRole) => Promise<void>;
+  login: (email: string, password: string) => Promise<void>;
   register: (email: string, password: string, name: string, role: UserRole) => Promise<void>;
   logout: () => Promise<void>;
 }
@@ -104,9 +104,9 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
     try {
       await authHelpers.signUp(email, password, userData);
       // Note: User will need to verify email before they can sign in
-    } catch (error: any) {
+    } catch (error) {
       console.error('Error signing up:', error);
-      throw new Error(error.message || 'Failed to create account. Please try again.');
+      throw new Error(error instanceof Error ? error.message : 'Failed to create account. Please try again.');
     } finally {
       setLoading(false);
     }
@@ -116,9 +116,9 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
     setLoading(true);
     try {
       await authHelpers.signIn(email, password);
-    } catch (error: any) {
+    } catch (error) {
       console.error('Error signing in:', error);
-      throw new Error(error.message || 'Invalid email or password. Please try again.');
+      throw new Error(error instanceof Error ? error.message : 'Invalid email or password. Please try again.');
     } finally {
       setLoading(false);
     }
@@ -129,7 +129,7 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
     try {
       await authHelpers.signInWithLinkedIn();
       // User will be redirected to LinkedIn for authentication
-    } catch (error: any) {
+    } catch (error) {
       console.error('Error signing in with LinkedIn:', error);
       setLoading(false);
       throw new Error('LinkedIn sign-in failed. Please try email sign-up instead.');
@@ -143,7 +143,7 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
       setUser(null);
       setProfile(null);
       setSession(null);
-    } catch (error: any) {
+    } catch (error) {
       console.error('Error signing out:', error);
       throw new Error('Failed to sign out. Please try again.');
     } finally {
@@ -154,7 +154,7 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
   const resetPassword = async (email: string) => {
     try {
       await authHelpers.resetPassword(email);
-    } catch (error: any) {
+    } catch (error) {
       console.error('Error resetting password:', error);
       throw new Error('Failed to send reset email. Please check your email address.');
     }
@@ -163,7 +163,7 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
   const updatePassword = async (password: string) => {
     try {
       await authHelpers.updatePassword(password);
-    } catch (error: any) {
+    } catch (error) {
       console.error('Error updating password:', error);
       throw new Error('Failed to update password. Please try again.');
     }
@@ -175,7 +175,7 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
     try {
       const updatedProfile = await profileHelpers.updateProfile(user.id, updates);
       setProfile(updatedProfile);
-    } catch (error: any) {
+    } catch (error) {
       console.error('Error updating profile:', error);
       throw new Error('Failed to update profile. Please try again.');
     }
@@ -187,7 +187,7 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
   };
 
   // Legacy compatibility methods
-  const login = async (email: string, password: string, role: UserRole) => {
+  const login = async (email: string, password: string) => {
     await signIn(email, password);
   };
 
@@ -223,6 +223,7 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
 };
 
+// eslint-disable-next-line react-refresh/only-export-components
 export const useAuth = () => {
   const context = useContext(AuthContext);
   if (context === undefined) {

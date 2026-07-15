@@ -3,7 +3,7 @@ import { Outlet } from 'react-router-dom';
 import { useLocation } from 'react-router-dom';
 import Navbar from './Navbar';
 import Footer from './Footer';
-import AnnouncementBanner from "./AnnouncementBanner";
+import AnnouncementBanner from "../common/AnnouncementBanner";
 
 const Layout: React.FC = () => {
   const location = useLocation();

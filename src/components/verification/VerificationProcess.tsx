@@ -12,10 +12,7 @@ import {
   GraduationCap,
   Building,
   FileText,
-  Camera,
-  Globe,
   BadgeCheck,
-  ArrowRight,
   Info
 } from 'lucide-react';
 
@@ -30,7 +27,6 @@ interface VerificationStep {
 }
 
 const VerificationProcess: React.FC = () => {
-  const [activeStep, setActiveStep] = useState<string | null>(null);
   const [uploadedFiles, setUploadedFiles] = useState<{[key: string]: File[]}>({});
 
   const verificationSteps: VerificationStep[] = [

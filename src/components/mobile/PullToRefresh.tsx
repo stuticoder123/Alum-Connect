@@ -17,13 +17,13 @@ const PullToRefresh: React.FC<PullToRefreshProps> = ({
   const [pullDistance, setPullDistance] = useState(0);
   const containerRef = useRef<HTMLDivElement>(null);
 
-  const handleDrag = (event: any, info: PanInfo) => {
+  const handleDrag = (_event: MouseEvent | TouchEvent | PointerEvent, info: PanInfo) => {
     if (containerRef.current?.scrollTop === 0 && info.offset.y > 0) {
       setPullDistance(Math.min(info.offset.y, threshold * 1.5));
     }
   };
 
-  const handleDragEnd = async (event: any, info: PanInfo) => {
+  const handleDragEnd = async () => {
     if (pullDistance >= threshold && !isRefreshing) {
       setIsRefreshing(true);
       try {

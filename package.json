@@ -13,7 +13,7 @@
     "@supabase/supabase-js": "^2.39.7",
     "date-fns": "^3.3.1",
     "emoji-picker-react": "^4.5.16",
-    "firebase": "^10.7.1",
+    "firebase": "^10.14.1",
     "framer-motion": "^11.0.8",
     "lucide-react": "^0.344.0",
     "openai": "^4.28.4",

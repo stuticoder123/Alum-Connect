@@ -1,21 +1,15 @@
-import Peer from 'peerjs';
+import Peer, { MediaConnection } from 'peerjs';
 
 interface CallOptions {
   video: boolean;
   audio: boolean;
 }
 
-interface PeerConnection {
-  peer: Peer;
-  call?: any;
-  stream?: MediaStream;
-}
-
 class WebRTCService {
   private peer: Peer | null = null;
   private localStream: MediaStream | null = null;
   private remoteStream: MediaStream | null = null;
-  private currentCall: any = null;
+  private currentCall: MediaConnection | null = null;
   private isInitialized = false;
 
   async initialize(userId: string): Promise<void> {
@@ -86,7 +80,7 @@ class WebRTCService {
         this.endCall();
       });
 
-      call.on('error', (error: any) => {
+      call.on('error', (error: unknown) => {
         console.error('Call error:', error);
         this.onCallError?.(error);
       });
@@ -97,7 +91,7 @@ class WebRTCService {
     }
   }
 
-  async answerCall(call: any, options: CallOptions): Promise<void> {
+  async answerCall(call: MediaConnection, options: CallOptions): Promise<void> {
     try {
       const stream = await this.getLocalStream(options);
       call.answer(stream);
@@ -160,15 +154,15 @@ class WebRTCService {
     return false;
   }
 
-  private handleIncomingCall(call: any): void {
+  private handleIncomingCall(call: MediaConnection): void {
     this.onIncomingCall?.(call);
   }
 
   // Event handlers (to be set by the component)
-  onIncomingCall?: (call: any) => void;
+  onIncomingCall?: (call: MediaConnection) => void;
   onRemoteStream?: (stream: MediaStream) => void;
   onCallEnded?: () => void;
-  onCallError?: (error: any) => void;
+  onCallError?: (error: unknown) => void;
 
   destroy(): void {
     this.endCall();
@@ -181,7 +175,7 @@ class WebRTCService {
     this.isInitialized = false;
   }
 
-  getLocalStream(): MediaStream | null {
+  getCurrentLocalStream(): MediaStream | null {
     return this.localStream;
   }
 

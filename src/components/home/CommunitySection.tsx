@@ -1,6 +1,6 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { Users, MessageSquare, Code, Trophy, Zap, Heart, Star, ArrowRight, Github, Linkedin, Twitter } from 'lucide-react';
+import { Users, MessageSquare, Code, Trophy, Zap, ArrowRight, Github, Linkedin, Twitter } from 'lucide-react';
 
 const CommunitySection: React.FC = () => {
   const communityStats = [

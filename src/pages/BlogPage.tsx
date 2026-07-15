@@ -2,7 +2,7 @@ import React from 'react';
 import { motion } from 'framer-motion';
 import { format } from 'date-fns';
 import Card, { CardContent } from '../components/ui/Card';
-import { Calendar, User, Clock, ChevronRight } from 'lucide-react';
+import { Calendar, Clock, ChevronRight } from 'lucide-react';
 
 interface BlogPost {
   id: number;

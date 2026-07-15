@@ -43,14 +43,14 @@ interface ChatMessage {
   userName: string;
   userAvatar?: string;
   content: string;
-  timestamp: any;
+  timestamp: unknown;
   type: 'text' | 'image' | 'file' | 'code' | 'system';
   threadId?: string;
   isPinned?: boolean;
   reactions: { [emoji: string]: string[] };
   mentions: string[];
   edited?: boolean;
-  editedAt?: any;
+  editedAt?: unknown;
 }
 
 interface ChatThread {
@@ -58,9 +58,9 @@ interface ChatThread {
   title: string;
   topic: string;
   createdBy: string;
-  createdAt: any;
+  createdAt: unknown;
   messageCount: number;
-  lastActivity: any;
+  lastActivity: unknown;
   isPinned: boolean;
   tags: string[];
   participants: string[];
@@ -71,7 +71,7 @@ interface UserPresence {
   userName: string;
   userAvatar?: string;
   isOnline: boolean;
-  lastSeen: any;
+  lastSeen: unknown;
   role: 'student' | 'alumni' | 'admin';
   contributions: number;
 }
@@ -253,7 +253,7 @@ class FirebaseService {
     }
   }
 
-  subscribeToLeaderboard(callback: (users: any[]) => void) {
+  subscribeToLeaderboard(callback: (users: Record<string, unknown>[]) => void) {
     const q = query(
       collection(db, 'leaderboard'),
       orderBy('contributions', 'desc'),
@@ -261,7 +261,7 @@ class FirebaseService {
     );
 
     return onSnapshot(q, (snapshot) => {
-      const users: any[] = [];
+      const users: Record<string, unknown>[] = [];
       snapshot.forEach((doc) => {
         users.push({ id: doc.id, ...doc.data() });
       });
@@ -270,7 +270,7 @@ class FirebaseService {
   }
 
   // Live Sessions
-  async createLiveSession(session: any) {
+  async createLiveSession(session: Record<string, unknown>) {
     try {
       const docRef = await addDoc(collection(db, 'liveSessions'), {
         ...session,
@@ -283,14 +283,14 @@ class FirebaseService {
     }
   }
 
-  subscribeToLiveSessions(callback: (sessions: any[]) => void) {
+  subscribeToLiveSessions(callback: (sessions: Record<string, unknown>[]) => void) {
     const q = query(
       collection(db, 'liveSessions'),
       orderBy('scheduledAt', 'asc')
     );
 
     return onSnapshot(q, (snapshot) => {
-      const sessions: any[] = [];
+      const sessions: Record<string, unknown>[] = [];
       snapshot.forEach((doc) => {
         sessions.push({ id: doc.id, ...doc.data() });
       });
