@@ -1,42 +1,26 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { 
-  MessageSquare, 
-  Send, 
-  X, 
-  Minimize2, 
-  Maximize2, 
-  Users, 
+import {
+  MessageSquare,
+  Send,
+  X,
+  Minimize2,
+  Maximize2,
   Settings,
   Pin,
   Hash,
   Mic,
   Video,
-  Phone,
   PhoneOff,
   MicOff,
   VideoOff,
-  Crown,
   Trophy,
-  Code,
   Bot,
   Search,
-  Filter,
   MoreVertical,
   Smile,
-  Paperclip,
-  Image,
-  FileText,
-  Calendar,
-  Star,
-  Heart,
-  ThumbsUp,
-  Share2,
-  Zap,
-  Sparkles,
-  Bell
+  Paperclip
 } from 'lucide-react';
-import { useAuth } from '../../contexts/AuthContext';
 import { format } from 'date-fns';
 import CodingBot from './CodingBot';
 
@@ -90,13 +74,11 @@ interface LiveSession {
 }
 
 const InternalChatModule: React.FC = () => {
-  const { profile } = useAuth();
   const [isOpen, setIsOpen] = useState(false);
   const [isMinimized, setIsMinimized] = useState(false);
   const [activeTab, setActiveTab] = useState<'chat' | 'threads' | 'leaderboard' | 'live' | 'bot'>('chat');
   const [selectedThread, setSelectedThread] = useState<string | null>(null);
   const [message, setMessage] = useState('');
-  const [searchQuery, setSearchQuery] = useState('');
   const [isInCall, setIsInCall] = useState(false);
   const [isMuted, setIsMuted] = useState(false);
   const [isVideoOn, setIsVideoOn] = useState(false);
@@ -947,7 +929,7 @@ const InternalChatModule: React.FC = () => {
                   ].map((tab) => (
                     <motion.button
                       key={tab.id}
-                      onClick={() => setActiveTab(tab.id as any)}
+                      onClick={() => setActiveTab(tab.id as 'chat' | 'threads' | 'leaderboard' | 'live' | 'bot')}
                       className={`flex items-center space-x-2 px-4 py-3 text-sm font-medium transition-all duration-300 relative ${
                         activeTab === tab.id
                           ? 'text-indigo-600 border-b-2 border-indigo-600 bg-white'

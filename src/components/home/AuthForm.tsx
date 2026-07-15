@@ -5,7 +5,7 @@ import { UserRole, useAuth } from '../../contexts/AuthContext';
 import Button from '../ui/Button';
 import Input from '../ui/Input';
 import Card, { CardContent, CardFooter, CardHeader } from '../ui/Card';
-import { User, Mail, Lock, ArrowRight, CheckCircle, Eye, EyeOff, Shield, Zap, GraduationCap, Briefcase, Linkedin, AlertCircle, Loader } from 'lucide-react';
+import { Mail, CheckCircle, Eye, EyeOff, Shield, Zap, GraduationCap, Briefcase, Linkedin, AlertCircle, Loader } from 'lucide-react';
 
 type FormMode = 'login' | 'register' | 'forgot-password';
 
@@ -99,8 +99,8 @@ const AuthForm: React.FC = () => {
         setSuccess('Password reset email sent! Please check your inbox for instructions.');
         setMode('login');
       }
-    } catch (err: any) {
-      setError(err.message || 'An error occurred. Please try again.');
+    } catch (err) {
+      setError(err instanceof Error ? err.message : 'An error occurred. Please try again.');
     } finally {
       setIsLoading(false);
     }
@@ -114,8 +114,8 @@ const AuthForm: React.FC = () => {
     try {
       await signInWithLinkedIn();
       // User will be redirected to LinkedIn for authentication
-    } catch (err: any) {
-      setError(err.message || 'LinkedIn sign-in failed. Please try email sign-up instead.');
+    } catch (err) {
+      setError(err instanceof Error ? err.message : 'LinkedIn sign-in failed. Please try email sign-up instead.');
       setIsLoading(false);
     }
   };

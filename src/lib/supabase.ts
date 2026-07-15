@@ -71,7 +71,7 @@ export interface UserSession {
   id: string;
   user_id: string;
   session_token: string;
-  device_info?: any;
+  device_info?: Record<string, unknown>;
   ip_address?: string;
   user_agent?: string;
   is_active: boolean;

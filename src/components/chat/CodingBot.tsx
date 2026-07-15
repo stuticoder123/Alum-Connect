@@ -1,6 +1,6 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Bot, Code, Trophy, Lightbulb, BookOpen, ExternalLink, Clock, Star, Calendar, Award, Target, Zap, ChevronRight, Play, CheckCircle, Siren as Fire, Crown, Medal } from 'lucide-react';
+import { Bot, Code, Trophy, Lightbulb, BookOpen, ExternalLink, Clock, Star, Calendar, Award, Target, Zap, ChevronRight, CheckCircle, Siren as Fire, Medal } from 'lucide-react';
 import { useAuth } from '../../contexts/AuthContext';
 import { useCodingProblems } from '../../hooks/useCodingProblems';
 
@@ -93,7 +93,7 @@ const CodingBot: React.FC = () => {
       try {
         await submitProblem(dailyProblem.id, true);
         setBotResponse(`🎉 **Congratulations!**\n\nYou earned **${dailyProblem.points} points** for solving "${dailyProblem.title}"!\n\n**New Stats:**\n• Total Points: ${userStats.totalPoints + dailyProblem.points}\n• Streak: ${userStats.currentStreak + 1} days\n• Problems Solved: ${userStats.problemsSolved + 1}\n\nKeep up the great work! 🚀`);
-      } catch (error) {
+      } catch {
         setBotResponse('❌ **Error:** Could not mark problem as completed. Please try again.');
       }
     }
@@ -511,7 +511,7 @@ const CodingBot: React.FC = () => {
         ].map((tab) => (
           <button
             key={tab.id}
-            onClick={() => setActiveTab(tab.id as any)}
+            onClick={() => setActiveTab(tab.id as 'today' | 'leaderboard' | 'resources' | 'progress')}
             className={`flex items-center space-x-2 px-4 py-2 rounded-lg whitespace-nowrap transition-all duration-300 ${
               activeTab === tab.id
                 ? 'bg-indigo-600 text-white shadow-lg'

@@ -1,6 +1,6 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { BadgeCheck, Shield, CheckCircle } from 'lucide-react';
+import { BadgeCheck } from 'lucide-react';
 
 interface VerificationBadgeProps {
   isVerified: boolean;

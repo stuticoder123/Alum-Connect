@@ -18,7 +18,7 @@ export const usePWA = () => {
   useEffect(() => {
     // Check if app is already installed
     const isStandalone = window.matchMedia('(display-mode: standalone)').matches;
-    const isInWebAppiOS = (window.navigator as any).standalone === true;
+    const isInWebAppiOS = (window.navigator as Navigator & { standalone?: boolean }).standalone === true;
     setIsInstalled(isStandalone || isInWebAppiOS);
 
     // Listen for beforeinstallprompt event

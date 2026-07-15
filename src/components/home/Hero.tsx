@@ -29,6 +29,44 @@ const Hero: React.FC = () => {
     }
   };
 
+  const howItWorksSteps = [
+    {
+      step: 1,
+      title: 'Create Your Profile',
+      description: 'Sign up for free and build your profile as a student or alumni in just a few minutes.',
+      icon: <UserPlus className="h-8 w-8" />,
+      color: 'from-indigo-500 to-blue-500'
+    },
+    {
+      step: 2,
+      title: 'Discover Mentors',
+      description: 'Our AI matches you with relevant alumni mentors based on your goals, skills and interests.',
+      icon: <Search className="h-8 w-8" />,
+      color: 'from-purple-500 to-pink-500'
+    },
+    {
+      step: 3,
+      title: 'Connect & Chat',
+      description: 'Reach out, exchange messages and start meaningful conversations with your mentors.',
+      icon: <MessageSquare className="h-8 w-8" />,
+      color: 'from-green-500 to-emerald-500'
+    },
+    {
+      step: 4,
+      title: 'Schedule Sessions',
+      description: 'Book mentorship sessions, workshops and events that fit your schedule.',
+      icon: <Calendar className="h-8 w-8" />,
+      color: 'from-orange-500 to-amber-500'
+    },
+    {
+      step: 5,
+      title: 'Grow Your Career',
+      description: 'Gain guidance, access opportunities and take the next big step in your career journey.',
+      icon: <Briefcase className="h-8 w-8" />,
+      color: 'from-rose-500 to-red-500'
+    }
+  ];
+
   const renderHowItWorksModal = () => (
     showHowItWorks && (
       <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4">

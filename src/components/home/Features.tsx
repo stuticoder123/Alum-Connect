@@ -1,6 +1,6 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { Users, Calendar, BookOpen, MessageSquare, MapPin, Shield, Zap, Star, Globe, ArrowRight, Target, Briefcase, GraduationCap, Heart, ThumbsUp, Share2, Tag, Video, Gift } from 'lucide-react';
+import { Users, BookOpen, MessageSquare, Shield, Globe, ArrowRight, Heart, Tag, Video, Gift } from 'lucide-react';
 
 interface FeatureProps {
   icon: React.ReactNode;

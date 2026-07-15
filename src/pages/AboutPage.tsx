@@ -1,6 +1,6 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { Github, Linkedin, Mail, Globe, MapPin, Briefcase, Twitter } from 'lucide-react';
+import { Github, Linkedin, Mail, MapPin, Briefcase, Twitter } from 'lucide-react';
 import Card, { CardContent } from '../components/ui/Card';
 
 const AboutPage: React.FC = () => {

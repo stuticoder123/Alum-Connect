@@ -12,7 +12,7 @@ const ProfilePage: React.FC = () => {
   
   // Sample data
   const [profileData, setProfileData] = useState({
-    name: currentUser?.name || '',
+    name: currentUser?.full_name || '',
     headline: currentUser?.role === 'student' 
       ? 'Computer Science Student' 
       : 'Software Engineer at Google',
@@ -64,15 +64,15 @@ const ProfilePage: React.FC = () => {
               <div className="absolute -bottom-16 left-8">
                 <div className="relative">
                   <div className="h-32 w-32 rounded-full border-4 border-white overflow-hidden bg-white">
-                    {currentUser?.profileImage ? (
+                    {currentUser?.avatar_url ? (
                       <img
-                        src={currentUser.profileImage}
-                        alt={currentUser.name}
+                        src={currentUser.avatar_url}
+                        alt={currentUser.full_name}
                         className="h-full w-full object-cover"
                       />
                     ) : (
                       <div className="h-full w-full flex items-center justify-center bg-gray-200 text-gray-600">
-                        {currentUser?.name?.charAt(0).toUpperCase() || 'U'}
+                        {currentUser?.full_name?.charAt(0).toUpperCase() || 'U'}
                       </div>
                     )}
                   </div>

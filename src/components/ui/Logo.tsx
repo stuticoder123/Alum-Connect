@@ -5,7 +5,7 @@ interface LogoProps {
   size?: 'sm' | 'md' | 'lg';
 }
 
-const Logo: React.FC<LogoProps> = ({ color = 'dark', size = 'md' }) => {
+const Logo: React.FC<LogoProps> = ({ size = 'md' }) => {
   const sizes = {
     sm: 'h-6 w-6',
     md: 'h-8 w-8',

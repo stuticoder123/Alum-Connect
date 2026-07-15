@@ -256,7 +256,7 @@ const HomePage: React.FC = () => {
           >
             <p className="text-gray-600 mb-8">Alumni from top companies trust AlumConnect</p>
             <div className="flex flex-wrap justify-center items-center gap-8 opacity-60">
-              {['Google', 'Microsoft', 'Amazon', 'Meta', 'Apple', 'Netflix'].map((company, index) => (
+              {['Google', 'Microsoft', 'Amazon', 'Meta', 'Apple', 'Netflix'].map((company) => (
                 <motion.div
                   key={company}
                   whileHover={{ scale: 1.1, opacity: 1 }}

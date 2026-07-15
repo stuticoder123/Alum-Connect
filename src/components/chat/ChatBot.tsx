@@ -1,6 +1,6 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { MessageSquare, Send, X, Minimize2, Maximize2, Bot, User, Sparkles, Zap, Brain, Heart } from 'lucide-react';
+import { Send, X, Minimize2, Maximize2, Bot, User, Sparkles } from 'lucide-react';
 
 interface Message {
   role: 'user' | 'assistant';

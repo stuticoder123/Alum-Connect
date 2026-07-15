@@ -14,7 +14,7 @@ export const useCodingProblems = () => {
     currentStreak: 0,
     rank: null as number | null
   });
-  const [loading, setLoading] = useState(false);
+  const [loading] = useState(false);
 
   useEffect(() => {
     fetchDailyProblem();
@@ -23,6 +23,7 @@ export const useCodingProblems = () => {
       fetchUserStats();
     }
     fetchLeaderboard();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [user]);
 
   const fetchDailyProblem = async () => {

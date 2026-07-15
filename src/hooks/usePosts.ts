@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { useAuth } from '../contexts/AuthContext';
 import { supabase } from '../lib/supabase';
-import type { Post, PostReaction, Comment, Profile } from '../lib/supabase';
+import type { Post } from '../lib/supabase';
 
 export const usePosts = () => {
   const { user } = useAuth();

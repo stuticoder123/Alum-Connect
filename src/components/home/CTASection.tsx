@@ -1,6 +1,6 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { ArrowRight, Sparkles, Users, MessageSquare, Heart, Star, Code, BookOpen, Award, Zap, Play, CheckCircle } from 'lucide-react';
+import { ArrowRight, Sparkles, Users, MessageSquare, Heart, Star } from 'lucide-react';
 import Button from '../ui/Button';
 
 export const CTASection: React.FC = () => {

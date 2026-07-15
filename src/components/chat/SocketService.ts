@@ -122,7 +122,7 @@ class SocketService {
     }
   }
 
-  onThreadCreated(callback: (thread: any) => void) {
+  onThreadCreated(callback: (thread: unknown) => void) {
     if (this.socket) {
       this.socket.on('thread_created', callback);
     }
@@ -141,7 +141,7 @@ class SocketService {
     }
   }
 
-  onLiveSessionUpdate(callback: (data: any) => void) {
+  onLiveSessionUpdate(callback: (data: unknown) => void) {
     if (this.socket) {
       this.socket.on('live_session_update', callback);
     }
@@ -203,7 +203,7 @@ class SocketService {
     }
   }
 
-  onBotResponse(callback: (response: any) => void) {
+  onBotResponse(callback: (response: unknown) => void) {
     if (this.socket) {
       this.socket.on('bot_response', callback);
     }

@@ -1,40 +1,27 @@
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import { useAuth } from '../../contexts/AuthContext';
-import { usePosts } from '../../hooks/usePosts';
 import { useNotifications } from '../../hooks/useNotifications';
 import Card, { CardContent, CardHeader } from '../ui/Card';
-import { 
-  Users, 
-  Briefcase, 
-  FileText, 
-  Calendar, 
-  MessageSquare, 
-  Star, 
-  MapPin, 
-  Building, 
+import {
+  Users,
+  Briefcase,
+  FileText,
+  Calendar,
+  MessageSquare,
+  Star,
+  MapPin,
+  Building,
   GraduationCap,
   Bot,
   Sparkles,
   CheckCircle,
   Clock,
   TrendingUp,
-  Award,
-  Target,
-  BookOpen,
-  Video,
-  Coffee,
   Send,
-  Heart,
-  ThumbsUp,
-  Share2,
-  MoreHorizontal,
   Search,
   Filter,
   Bell,
-  Plus,
-  ArrowRight,
-  Zap,
   Brain,
   Shield
 } from 'lucide-react';
@@ -85,10 +72,8 @@ interface ResumeReview {
 
 const StudentDashboard: React.FC = () => {
   const { profile } = useAuth();
-  const { posts, loading, createPost } = usePosts();
-  const { notifications, unreadCount } = useNotifications();
+  const { unreadCount } = useNotifications();
   const [activeTab, setActiveTab] = useState('overview');
-  const [newPost, setNewPost] = useState('');
   const [selectedMentor, setSelectedMentor] = useState<MentorMatch | null>(null);
   const [showAIChat, setShowAIChat] = useState(false);
   const [aiChatMessage, setAiChatMessage] = useState('');

@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Download, X, Smartphone, Monitor, Zap, Wifi, Bell } from 'lucide-react';
+import { Download, X, Smartphone, Zap, Wifi, Bell } from 'lucide-react';
 import { usePWA } from '../../hooks/usePWA';
 
 const InstallPrompt: React.FC = () => {
