@@ -255,16 +255,27 @@ const HomePage: React.FC = () => {
             className="text-center"
           >
             <p className="text-gray-600 mb-8">Alumni from top companies trust AlumConnect</p>
-            <div className="flex flex-wrap justify-center items-center gap-8 opacity-60">
-              {['Google', 'Microsoft', 'Amazon', 'Meta', 'Apple', 'Netflix'].map((company) => (
-                <motion.div
-                  key={company}
-                  whileHover={{ scale: 1.1, opacity: 1 }}
-                  className="text-2xl font-bold text-gray-400 hover:text-gray-600 transition-all duration-300"
-                >
-                  {company}
-                </motion.div>
-              ))}
+            <div className="relative overflow-hidden">
+              <motion.div 
+                className="flex gap-8 py-8 px-4"
+                animate={{ x: ['0%', '-100%'] }}
+                transition={{ 
+                  duration: 20, 
+                  repeat: Infinity, 
+                  ease: 'linear'
+                }}
+              >
+                {['Google', 'Microsoft', 'Amazon', 'Meta', 'Apple', 'Netflix', 'Google', 'Microsoft', 'Amazon', 'Meta', 'Apple', 'Netflix'].map((company, index) => (
+                  <div
+                    key={index}
+                    className="flex-shrink-0 px-6 py-3 bg-gray-100 rounded-lg hover:bg-indigo-100 transition-all duration-300 cursor-pointer"
+                  >
+                    <div className="text-lg font-semibold text-gray-700 hover:text-indigo-600 transition-colors whitespace-nowrap">
+                      {company}
+                    </div>
+                  </div>
+                ))}
+              </motion.div>
             </div>
           </motion.div>
         </div>
