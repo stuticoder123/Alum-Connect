@@ -3,6 +3,10 @@ import { Link } from 'react-router-dom';
 import { Github, Linkedin, Mail, Twitter, Heart } from 'lucide-react';
 
 const Footer: React.FC = () => {
+  const handleNavigation = (path: string) => {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  };
+
   return (
     <footer className="bg-gradient-to-br from-gray-900 via-slate-800 to-gray-900 text-white">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
@@ -41,7 +45,8 @@ const Footer: React.FC = () => {
               ].map((item) => (
                 <li key={item.name}>
                   <Link 
-                    to={item.path} 
+                    to={item.path}
+                    onClick={() => handleNavigation(item.path)}
                     className="text-gray-300 hover:text-indigo-400 transition-colors duration-300 flex items-center group"
                   >
                     <span className="w-1 h-1 bg-indigo-500 rounded-full mr-2 opacity-0 group-hover:opacity-100 transition-opacity"></span>

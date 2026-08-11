@@ -96,6 +96,13 @@ const Navbar: React.FC<NavbarProps> = ({ transparent = false }) => {
     navigate('/#testimonials');
   };
 
+  const handleLogoClick = (e: React.MouseEvent<HTMLAnchorElement>) => {
+    e.preventDefault();
+    setIsOpen(false);
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+    navigate('/');
+  };
+
 
   return (
     <motion.nav 
@@ -111,7 +118,7 @@ const Navbar: React.FC<NavbarProps> = ({ transparent = false }) => {
             whileHover={{ scale: 1.05 }}
             transition={{ duration: 0.2 }}
           >
-            <Link to="/" className="flex items-center group">
+            <Link to="/" onClick={handleLogoClick} className="flex items-center group">
               <img 
                 src="/fotor-2025020519619[1].png" 
                 alt="AlumConnect Logo" 
